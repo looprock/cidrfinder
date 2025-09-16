@@ -73,6 +73,10 @@ func (c *CIDRService) RegisterCIDR(ctx context.Context, key, cidr string) error 
 		return fmt.Errorf("invalid CIDR: %w", err)
 	}
 
+	if err := c.validateUniqueness(ctx, key, cidr); err != nil {
+		return err
+	}
+
 	record := CIDRRecord{
 		Key:  key,
 		CIDR: cidr,
@@ -140,5 +144,23 @@ func (c *CIDRService) validateCIDR(cidr string) error {
 	if err != nil {
 		return fmt.Errorf("invalid CIDR format: %w", err)
 	}
+	return nil
+}
+
+func (c *CIDRService) validateUniqueness(ctx context.Context, key, cidr string) error {
+	records, err := c.GetAllCIDRs(ctx)
+	if err != nil {
+		return fmt.Errorf("failed to check existing records: %w", err)
+	}
+
+	for _, record := range records {
+		if record.Key == key {
+			return fmt.Errorf("key '%s' already exists", key)
+		}
+		if record.CIDR == cidr {
+			return fmt.Errorf("CIDR '%s' already exists", cidr)
+		}
+	}
+
 	return nil
 }

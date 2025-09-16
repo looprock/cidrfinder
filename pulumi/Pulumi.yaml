@@ -1,0 +1,17 @@
+name: cidr-finder
+runtime: nodejs
+description: CIDR Finder service using AWS Lambda and DynamoDB
+
+config:
+  aws:region:
+    description: The AWS region to deploy resources in
+    default: us-east-1
+  cidr-finder:function-name:
+    description: Name of the Lambda function
+    default: cidr-finder
+  cidr-finder:table-name:
+    description: Name of the DynamoDB table
+    default: cidr-registry
+  cidr-finder:lambda-zip-path:
+    description: Path to the Lambda deployment package
+    default: ../function.zip

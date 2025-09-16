@@ -1,0 +1,21 @@
+{
+  "name": "cidr-finder-pulumi",
+  "version": "1.0.0",
+  "description": "CIDR Finder service infrastructure with Pulumi",
+  "main": "index.ts",
+  "scripts": {
+    "build": "tsc",
+    "start": "pulumi up",
+    "destroy": "pulumi destroy",
+    "preview": "pulumi preview"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@pulumi/pulumi": "^3.135.0",
+    "@pulumi/aws": "^6.56.0",
+    "@pulumi/awsx": "^2.15.0"
+  }
+}
